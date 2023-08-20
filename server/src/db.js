@@ -72,8 +72,8 @@ const {
 
   //Relacions de 1 a n entre Review y Products
 
-  Product.hasMany(ReviewProducts, { as: "reviewProduct", foreignKey: "idProductReview" });
-ReviewProducts.belongsTo(Product, {as: "reviewProduct",foreignKey: "idProductReview",});
+ Product.hasMany(ReviewProducts, { as: "reviewProduct", foreignKey: "idProductReview" });
+ ReviewProducts.belongsTo(Product, {as: "reviewProduct",foreignKey: "idProductReview",});
 
  module.exports = {
     ...sequelize.models,
