@@ -60,7 +60,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const {
     Category,
-    Product
+    Product,
+    ReviewProducts,
   } = sequelize.models;
 
 
@@ -69,6 +70,10 @@ const {
   Product.belongsToMany(Category, { through: 'ProductCategory', timestamps : false });
   Category.belongsToMany(Product, { through: 'ProductCategory', timestamps : false });
 
+  //Relacions de 1 a n entre Review y Products
+
+  Product.hasMany(ReviewProducts, { as: "reviewProduct", foreignKey: "idProductReview" });
+ReviewProducts.belongsTo(Product, {as: "reviewProduct",foreignKey: "idProductReview",});
 
  module.exports = {
     ...sequelize.models,
