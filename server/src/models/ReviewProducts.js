@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: false,
       },
-      //id del user que hace el reporte
+      //id o el nombre del usuario que hace el review, pilas con esto!!!
       UserNameUserReview: {
         type: DataTypes.STRING,
         allowNull: false,

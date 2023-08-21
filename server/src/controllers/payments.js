@@ -29,9 +29,9 @@ console.log("El payload del back", payload);
     //   }
     // ],
     back_urls: {
-      success:"http://localhost:3001/success",
-      failure:"http://localhost:3001/failure",
-      pending:"http://localhost:3001/pending"
+      success:"https://quickshop-3jbp.onrender.com/products/success",
+      failure:"https://quickshop-3jbp.onrender.com/failure",
+      pending:"https://quickshop-3jbp.onrender.com/products/pending"
 
     },
 
