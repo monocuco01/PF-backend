@@ -226,6 +226,8 @@ const sortProductsByNameFromDB = async (order) => {
 };
 
 const updateProduct = async (req, res) => {
+  console.log("req.params:", req.params);
+  console.log("req.body:", req.body);
   const { id } = req.params;
   const { title, price, description, image, rating, categories } = req.body;
 
