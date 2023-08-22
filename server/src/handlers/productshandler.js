@@ -1,12 +1,13 @@
-const { 
-  getProducts, 
-  getProductById, 
-  createProduct,   
+const {
+  getProducts,
+  getProductById,
+  createProduct,
   filterProductsByCategory,
   sortProductsByPriceFromDB,
   sortProductsByNameFromDB,
-  updateProduct, 
-  deleteProduct, } = require('../controllers/products');
+  updateProduct,
+  deleteProduct,
+} = require("../controllers/products");
 
 const getAllProducts = async (req, res) => {
   const { title } = req.query;
@@ -25,7 +26,7 @@ const getProductByIdHandler = async (req, res) => {
     if (product) {
       res.status(200).json(product);
     } else {
-      res.status(404).json({ error: 'Product not found.' });
+      res.status(404).json({ error: "Product not found." });
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -106,9 +107,9 @@ const deleteProductHandler = async (req, res) => {
 
   try {
     await deleteProduct(id);
-    res.status(200).json({ message: 'Product deleted successfully.' });
+    res.status(200).json({ message: "Product deleted successfully." });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ error: id });
   }
 };
 
