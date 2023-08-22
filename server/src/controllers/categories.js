@@ -14,7 +14,7 @@ const getCategoriesFromAPI = async () => {
   }
 };
 
-const filterCategorie = async ({ name }) => {
+/*const filterCategorie = async ({ name }) => {
   const where = {};
   
   if (name) {
@@ -29,7 +29,7 @@ const filterCategorie = async ({ name }) => {
 
   return categoriesFiltered;
 };
-
+*/
 
 const syncCategoriesWithDB = async () => {
   try {
@@ -77,5 +77,5 @@ const createCategory = async (name) => {
 
 
 module.exports = {
-  getCategoriesProducts, createCategory, filterCategorie,
+  getCategoriesProducts, createCategory, 
 };
