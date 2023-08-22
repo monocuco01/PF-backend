@@ -30,7 +30,7 @@ console.log("El payload del back", payload);
     // ],
     back_urls: {
       success:"https://quickshop-3jbp.onrender.com/products/success",
-      failure:"https://pf-backend-nwu9.onrender.com/failure",
+      failure:"pf-frontend-weld.vercel.app/failure",
       pending:"https://quickshop-3jbp.onrender.com/products/pending"
 
     },
