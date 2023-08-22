@@ -13,7 +13,8 @@ const getAllProductsFromDB = async () => {
       description: prod.description,
       image: prod.image,
       rating: prod.rating,
-      categories: prod.Categories.map((category) => category.name), // Obtener los nombres de categorías
+      isActive: prod.isActive,
+      categories: prod.Categories.map((category) => category.name),
     }));
   } catch (error) {
     console.error("Error retrieving products from DB:", error);
@@ -55,7 +56,8 @@ const getProductByIdFromDB = async (id) => {
         description: productDB.description,
         image: productDB.image,
         rating: productDB.rating,
-        categories: productDB.Categories.map((category) => category.name), // Obtener los nombres de categorías
+        isActive: productDB.isActive,
+        categories: productDB.Categories.map((category) => category.name),
       };
     }
 
@@ -76,24 +78,20 @@ const createProduct = async (productData) => {
 
     let product;
 
-    // Crear el producto primero
     console.log('Creando producto con datos:', rest);
     product = await Product.create(rest);
 
     if (categories && categories.length > 0) {
-      // Buscar las categorías por nombre
       const categoryInstances = await Category.findAll({
         where: {
           name: categories,
         },
       });
 
-      // Establecer la relación con las categorías
       await product.setCategories(categoryInstances);
       console.log('Relación con categorías establecida:', categoryInstances);
     }
 
-    // Recargar el producto para obtener las categorías asociadas
     product = await Product.findByPk(product.id, {
       include: Category,
     });
@@ -124,7 +122,8 @@ const getProductsByTitleFromDB = async (title) => {
       description: prod.description,
       image: prod.image,
       rating: prod.rating,
-      categories: prod.Categories.map((category) => category.name), // Obtener los nombres de categorías
+      isActive: prod.isActive,
+      categories: prod.Categories.map((category) => category.name),
     }));
   } catch (error) {
     console.error("Error retrieving products from DB:", error);
@@ -138,8 +137,6 @@ const getProductsByTitle = async (title) => {
   const allProducts = [...productsFromDB];
   return allProducts.slice(0, 15);
 };
-
-//////////////////////////////
 
 const filterProductsByCategoryFromDB = async (categoryName) => {
   try {
@@ -159,6 +156,7 @@ const filterProductsByCategoryFromDB = async (categoryName) => {
       description: prod.description,
       image: prod.image,
       rating: prod.rating,
+      isActive: prod.isActive,
       categories: category.name,
     }));
   } catch (error) {
@@ -167,7 +165,6 @@ const filterProductsByCategoryFromDB = async (categoryName) => {
   }
 };
 
-// Función para filtrar productos por categoría
 const filterProductsByCategory = async (categoryName) => {
   const productsFromDB = await filterProductsByCategoryFromDB(categoryName);
 
@@ -175,7 +172,6 @@ const filterProductsByCategory = async (categoryName) => {
   return allProducts.slice(0, 15);
 };
 
-// Función para ordenar productos por precio desde la base de datos
 const sortProductsByPriceFromDB = async (order) => {
   try {
     const sortOrder = order === 'asc' ? 'ASC' : 'DESC';
@@ -192,6 +188,7 @@ const sortProductsByPriceFromDB = async (order) => {
       description: prod.description,
       image: prod.image,
       rating: prod.rating,
+      isActive: prod.isActive,
       categories: prod.Categories.map((category) => category.name),
     }));
   } catch (error) {
@@ -200,7 +197,6 @@ const sortProductsByPriceFromDB = async (order) => {
   }
 };
 
-// Función para ordenar productos por nombre desde la base de datos
 const sortProductsByNameFromDB = async (order) => {
   try {
     const sortOrder = order === 'asc' ? 'ASC' : 'DESC';
@@ -217,63 +213,12 @@ const sortProductsByNameFromDB = async (order) => {
       description: prod.description,
       image: prod.image,
       rating: prod.rating,
+      isActive: prod.isActive,
       categories: prod.Categories.map((category) => category.name),
     }));
   } catch (error) {
     console.error("Error retrieving products from DB:", error);
     throw error;
-  }
-};
-
-const updateProduct = async (req, res) => {
-  console.log("req.params:", req.params);
-  console.log("req.body:", req.body);
-  const { id } = req.params;
-  const { title, price, description, image, rating, categories } = req.body;
-
-  try {
-    const existingProduct = await getProductByIdFromDB(id);
-    if (!existingProduct) {
-      return res.status(404).json({ error: 'Product not found.' });
-    }
-
-    existingProduct.title = title;
-    existingProduct.price = price;
-    existingProduct.description = description;
-    existingProduct.image = image;
-    existingProduct.rating = rating;
-
-    if (categories && categories.length > 0) {
-      const categoryInstances = await Category.findAll({
-        where: {
-          name: categories,
-        },
-      });
-      await existingProduct.setCategories(categoryInstances);
-    }
-
-    await existingProduct.save();
-
-    return res.status(200).json(existingProduct);
-  } catch (error) {
-    return res.status(400).json({ error: error.message });
-  }
-};
-
-const deleteProduct = async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const product = await Product.findByPk(id);
-    if (!product) {
-      return res.status(404).json({ error: 'Product not found.' });
-    }
-
-    await product.destroy();
-
-    return res.status(200).json({ message: 'Product deleted successfully.' });
-  } catch (error) {
-    return res.status(400).json({ error: error.message });
   }
 };
 
@@ -285,6 +230,4 @@ module.exports = {
   filterProductsByCategory,
   sortProductsByPriceFromDB,
   sortProductsByNameFromDB,
-  updateProduct, 
-  deleteProduct, 
 };
