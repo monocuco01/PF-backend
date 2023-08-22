@@ -29,9 +29,9 @@ console.log("El payload del back", payload);
     //   }
     // ],
     back_urls: {
-      success:"https://quickshop-3jbp.onrender.com/products/success",
-      failure:"pf-frontend-weld.vercel.app/failure",
-      pending:"https://quickshop-3jbp.onrender.com/products/pending"
+      success:"/products/success",
+      failure:"/failure",
+      pending:"/pending"
 
     },
 
