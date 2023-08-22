@@ -6,7 +6,7 @@ const paymenrouter = Router();
 paymenrouter.post('/create-order', createOrder);
 
 paymenrouter.get('/success', successOrder);
-paymenrouter.get('/failure', failure );
+paymenrouter.get('https://pf-backend-nwu9.onrender.com/failure', failure );
 paymenrouter.get('/pending', pending );
 
   paymenrouter.post('/webhook', webhook);

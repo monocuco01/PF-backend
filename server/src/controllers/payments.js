@@ -30,7 +30,7 @@ console.log("El payload del back", payload);
     // ],
     back_urls: {
       success:"/products/success",
-      failure:"/failure",
+      failure:"https://pf-backend-nwu9.onrender.com/failure",
       pending:"/pending"
 
     },
