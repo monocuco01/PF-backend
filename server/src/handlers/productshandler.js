@@ -109,7 +109,7 @@ const deleteProductHandler = async (req, res) => {
     await deleteProduct(id);
     res.status(200).json({ message: "Product deleted successfully." });
   } catch (error) {
-    res.status(400).json({ error: id });
+    res.status(400).json({ error: error.message });
   }
 };
 
