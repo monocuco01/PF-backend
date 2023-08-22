@@ -9,7 +9,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_RENDER } = process.env;
 
 
 
-//Con este trabajan desde su maquina
+/*//Con este trabajan desde su maquina
        const sequelize = new Sequelize(
            `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
            {
@@ -17,21 +17,21 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_RENDER } = process.env;
              native: false,
            }
          );
-
+*/
 
 
   //Con esta cuando ya este deployada
-  // console.log(DB_RENDER);
-  //  const sequelize = new Sequelize(DB_RENDER, {
-  //       logging: false,
-  //       dialect: 'postgres',
-  //       dialectOptions: {
-  //         ssl: {
-  //           require: true,
-  //           rejectUnauthorized: false 
-  //         }
-  //       }
-  //     });
+   console.log(DB_RENDER);
+   const sequelize = new Sequelize(DB_RENDER, {
+         logging: false,
+         dialect: 'postgres',
+         dialectOptions: {
+           ssl: {
+            require: true,
+             rejectUnauthorized: false 
+           }
+         }
+       });
 
 
 const basename = path.basename(__filename);
