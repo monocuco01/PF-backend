@@ -11,7 +11,7 @@ const {
 
 const products = Router();
 
-products.get('/', getAllProducts);
+products.put('/', getAllProducts);
 products.get('/:id', getProductByIdHandler);
 products.post('/', createNewProduct); 
 products.get('/filter/category/:categoryName', getProductsByCategory); 
