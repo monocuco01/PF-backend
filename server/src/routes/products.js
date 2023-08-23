@@ -11,12 +11,12 @@ const {
 
 const products = Router();
 
-products.put('/', getAllProducts);
+products.get('/', getAllProducts);
 products.get('/:id', getProductByIdHandler);
 products.post('/', createNewProduct); 
 products.get('/filter/category/:categoryName', getProductsByCategory); 
 products.get('/sort/price/:order', sortProductsByPrice);             
 products.get('/sort/name/:order', sortProductsByName); 
-products.get('/:id', updateProductHandler);
+products.put('/:id', updateProductHandler);
 
 module.exports = products;
