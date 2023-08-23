@@ -1,0 +1,10 @@
+{
+    "service": "gmail",
+    "auth": {
+      "type": "OAuth2",
+      "user": "quickshoppf@gmail.com",
+      "clientId": "991020371836-ef6eusvg0e0srhcbhngpjqhhkmn6bkuq.apps.googleusercontent.com",
+      "clientSecret": "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",
+      "refreshToken": "1//04NULQGjKNfmTCgYIARAAGAQSNwF-L9Irsb8nX1WHxo4ebfCZCrxAjGwALKTh7SPlesEpueUxEcHY_JfPzhIqVDoS4qm6F4XAJf8"
+    }
+  }
