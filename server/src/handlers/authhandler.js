@@ -1,4 +1,4 @@
-const { registerUser, loginUser } = require('../controllers/auth');
+const { registerUser, loginUser, getAllUsers } = require('../controllers/auth');
 
 const registerUserHandler = async (req, res) => {
   const userData = req.body;
@@ -21,7 +21,17 @@ const loginUserHandler = async (req, res) => {
     }
   };
 
+  const getAllUsersHandler = async (req, res) => {
+    try {
+      const users = await getAllUsers();
+      res.status(200).json(users);
+    } catch (error) {
+      res.status(500).json({ error: "Error en el servidor" });
+    }
+  };
+
 module.exports = {
   registerUserHandler,
   loginUserHandler,
+  getAllUsersHandler
 };

@@ -17,5 +17,6 @@ router.use("/", paymenrouter); // Cambio en la ruta
 /*router.use("/filter", filtercategorie2);*/
 router.use('/review', reviewProductRouter)
 router.use("/", routerSendMail);
+router.use('/users', auth);
 
 module.exports = router;
