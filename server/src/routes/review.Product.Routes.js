@@ -39,11 +39,14 @@ reviewProductRouter.post("/:idProductReview", async (req, res) => {
 
 
 
-reviewProductRouter.get("/:id", async (req, res) => {
-    const {id} = req.params;
-    const review = await getReviewProduct(id);
+reviewProductRouter.get("/", async (req, res) => {
+    // const {id} = req.params;
+    const review = await getReviewProduct();
     try {
-        res.status(200).json(review);
+
+      res.send('hola')
+         res.status(200).json(review);
+        
     } catch (error) {
         return res.status(200).send(error.message);
     }
