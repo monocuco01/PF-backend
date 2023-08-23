@@ -222,6 +222,22 @@ const sortProductsByNameFromDB = async (order) => {
   }
 };
 
+const updateProduct = async (productId, updatedData) => {
+  try {
+    const product = await Product.findByPk(productId);
+
+    if (!product) {
+      throw new Error('Product not found.');
+    }
+
+    await product.update(updatedData);
+    return product;
+  } catch (error) {
+    console.error('Error updating product:', error);
+    throw error;
+  }
+};
+
 module.exports = {
   getProducts,
   getProductById,
@@ -230,4 +246,5 @@ module.exports = {
   filterProductsByCategory,
   sortProductsByPriceFromDB,
   sortProductsByNameFromDB,
+  updateProduct
 };

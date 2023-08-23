@@ -5,6 +5,7 @@ const {
   filterProductsByCategory,
   sortProductsByPriceFromDB,
   sortProductsByNameFromDB,
+  updateProduct
 } = require("../controllers/products");
 
 const getAllProducts = async (req, res) => {
@@ -80,6 +81,18 @@ const sortProductsByName = async (req, res) => {
   }
 };
 
+const updateProductHandler = async (req, res) => {
+  const { id } = req.params;
+  const updatedData = req.body;
+
+  try {
+    const updatedProduct = await updateProduct(id, updatedData);
+    res.status(200).json(updatedProduct);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getAllProducts,
   getProductByIdHandler,
@@ -87,4 +100,5 @@ module.exports = {
   getProductsByCategory,
   sortProductsByPrice,
   sortProductsByName,
+  updateProductHandler
 };
