@@ -1,4 +1,6 @@
 const { DataTypes } = require("sequelize");
+const bcrypt = require("bcrypt");
+const { v4: uuidv4 } = require("uuid");
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -7,52 +9,41 @@ module.exports = (sequelize) => {
       id: {
         type: DataTypes.STRING,
         primaryKey: true,
+        defaultValue: () => uuidv4(),
       },
+
       firstName: {
         type: DataTypes.STRING(40),
         allowNull: false,
       },
-      lastName: {
-        type: DataTypes.STRING(40),
-        allowNull: false,
-      },
+
       userName: {
         type: DataTypes.STRING(20),
         allowNull: false,
       },
+
       email: {
         type: DataTypes.STRING(255),
         unique: true,
         allowNull: false,
       },
-     
-      age: {
-        type: DataTypes.INTEGER,
+
+      password: {
+        type: DataTypes.STRING(72),
         allowNull: false,
+        set(value) {
+          const hashedPassword = bcrypt.hashSync(value, 10); // Genera el hash
+          this.setDataValue("password", hashedPassword);
+        },
       },
      
-      gender: {
-        type: DataTypes.ENUM("Male", "Female", "No specified", "Others"),
-        allowNull: true,
-      },
       admin: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
       },
-      image: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      phone: {
-        type: DataTypes.ARRAY(DataTypes.TEXT),
-        allowNull: false,
-      },
-      place: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-        
+
+
     },
     {
       paranoid: true,

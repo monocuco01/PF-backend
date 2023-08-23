@@ -1,6 +1,7 @@
 const { Router } = require("express");
 
 // Importación de rutas
+const auth = require("./auth");
 const categories = require("./categories");
 const products = require("./products");
 const paymenrouter = require("./payments.routes"); // Cambio en la importación
@@ -8,6 +9,7 @@ const paymenrouter = require("./payments.routes"); // Cambio en la importación
 const reviewProductRouter =require("./review.Product.Routes")
 const router = Router();
 
+router.use("/auth", auth);
 router.use("/categories", categories);
 router.use("/products", products);
 router.use("/", paymenrouter); // Cambio en la ruta
