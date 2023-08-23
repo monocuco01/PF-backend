@@ -1,35 +1,15 @@
 const axios = require('axios');
 const { Category } = require('../db');
-const { Op } = require('sequelize');
-
-
 
 const getCategoriesFromAPI = async () => {
   try {
-    const response = await axios.get('https://pf-backend-nwu9.onrender.com/categories');
+    const response = await axios.get('https://fakestoreapi.com/products/categories');
     return response.data.map((name) => ({ name }));
   } catch (error) {
     console.error('Error retrieving categories from API:', error);
     throw error;
   }
 };
-
-const filterCategorie = async ({ name }) => {
-  const where = {};
-  
-  if (name) {
-    where.name = {
-      [Op.iLike]: `%${name}%`,
-    };
-  }
-  
-  const categoriesFiltered = await Category.findAll({
-    where,
-  });
-
-  return categoriesFiltered;
-};
-
 
 const syncCategoriesWithDB = async () => {
   try {
@@ -77,5 +57,5 @@ const createCategory = async (name) => {
 
 
 module.exports = {
-  getCategoriesProducts, createCategory, filterCategorie,
+  getCategoriesProducts, createCategory
 };

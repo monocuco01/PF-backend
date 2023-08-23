@@ -1,12 +1,12 @@
-const { 
-  getProducts, 
-  getProductById, 
-  createProduct,   
+const {
+  getProducts,
+  getProductById,
+  createProduct,
   filterProductsByCategory,
   sortProductsByPriceFromDB,
   sortProductsByNameFromDB,
-  updateProduct, 
-  deleteProduct, } = require('../controllers/products');
+  updateProduct
+} = require("../controllers/products");
 
 const getAllProducts = async (req, res) => {
   const { title } = req.query;
@@ -25,7 +25,7 @@ const getProductByIdHandler = async (req, res) => {
     if (product) {
       res.status(200).json(product);
     } else {
-      res.status(404).json({ error: 'Product not found.' });
+      res.status(404).json({ error: "Product not found." });
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -33,16 +33,16 @@ const getProductByIdHandler = async (req, res) => {
 };
 
 const createNewProduct = async (req, res) => {
-  const { title, price, description, image, rating, categories } = req.body; // Cambio aquí
+  const { title, price, description, image, rating, categories, isActive } = req.body;
   try {
-    // Creamos el nuevo producto
     const newProduct = await createProduct({
       title,
       price,
       description,
       image,
       rating,
-      categories, // Cambio aquí
+      categories,
+      isActive,
     });
 
     res.status(201).json(newProduct);
@@ -51,7 +51,6 @@ const createNewProduct = async (req, res) => {
   }
 };
 
-//////////////////////
 const getProductsByCategory = async (req, res) => {
   const { categoryName } = req.params;
   try {
@@ -84,29 +83,11 @@ const sortProductsByName = async (req, res) => {
 
 const updateProductHandler = async (req, res) => {
   const { id } = req.params;
-  const { title, price, description, image, rating, categories } = req.body;
+  const updatedData = req.body;
 
   try {
-    const updatedProduct = await updateProduct(id, {
-      title,
-      price,
-      description,
-      image,
-      rating,
-      categories,
-    });
+    const updatedProduct = await updateProduct(id, updatedData);
     res.status(200).json(updatedProduct);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
-const deleteProductHandler = async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    await deleteProduct(id);
-    res.status(200).json({ message: 'Product deleted successfully.' });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -119,6 +100,5 @@ module.exports = {
   getProductsByCategory,
   sortProductsByPrice,
   sortProductsByName,
-  updateProductHandler, // Agregado
-  deleteProductHandler, // Agregado
+  updateProductHandler
 };

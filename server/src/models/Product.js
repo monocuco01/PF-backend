@@ -31,12 +31,16 @@ module.exports = (sequelize) => {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+    },
   }, {
     timestamps: false,
     freezeTableName: true,
   });
-
-  // Nueva asociación con Category
+  
   Product.associate = (models) => {
     Product.belongsToMany(models.Category, {
       through: 'ProductCategory',
